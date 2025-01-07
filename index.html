@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Harry Potter</title>
+    <link rel="stylesheet" href="styles/style.css" />
+  </head>
+  <body>
+    <div class="header-container">
+      <h1>Harry Potter Characters</h1>
+      <h3>Explore the magical world of Harry Potter!</h3>
+    </div>
+    <button id="menu-toggle">Menu</button>
+    <div id="options-container">
+      <button class="option-button" data-action="all-characters">All Characters</button>
+      <button class="option-button" data-action="spells">All Spells</button>
+      <button class="option-button" data-action="books">All Books</button>
+      <button class="option-button" data-action="houses">All Houses</button>
+      <form id="form">
+        <label for="searchData">Search for:</label>
+        <input type="text" placeholder="characters, spells, books, or houses" id="searchData" />
+        <button>Submit</button>
+      </form>
+    </div>
+    <div id="content-container"></div>
+    <script src="scripts/script.js"></script>
+  </body>
+</html>
+
+
