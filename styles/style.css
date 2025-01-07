@@ -1,11 +1,17 @@
 /* General Styling */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 body {
   font-family: 'Comfortaa', sans-serif;
   background: #111;
   color: #FFFFFF;
   margin: 0;
   padding: 0;
-  background-image:url('https://i.postimg.cc/ZqmcPy10/harry-potter-desk-wallpaper-by-bamberos-compressed.jpg'); /* https://i.postimg.cc/ZqmcPy10/harry-potter-desk-wallpaper-by-bamberos-compressed.jpg  */
+  background-image: url('../assets/harry-potter-desk-wallpaper.jpg'); /* https://i.postimg.cc/ZqmcPy10/harry-potter-desk-wallpaper-by-bamberos-compressed.jpg  */
   background-size: cover;
   background-attachment: fixed;
   background-repeat: no-repeat;
@@ -86,7 +92,7 @@ body {
 
 /* Content Container */
 #content-container {
-  margin-top: 280px;
+  margin-top: 320px;
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
@@ -253,5 +259,9 @@ body {
 
   #form button {
     width: 100%; /* Full width button */
+  }
+
+  #content-container {
+    margin-top: 200px;
   }
 }

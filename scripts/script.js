@@ -7,19 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const menuToggle = document.getElementById('menu-toggle');
   const optionsContainer = document.getElementById('options-container');
 
-  const houseImages = {
-    Gryffindor: 'https://link-to-gryffindor-image.com',
-    Slytherin: 'https://link-to-slytherin-image.com',
-    Ravenclaw: 'https://link-to-ravenclaw-image.com',
-    Hufflepuff: 'https://link-to-hufflepuff-image.com',
-};
-
-const spellImages = {
-    "Expelliarmus": 'https://link-to-expelliarmus-image.com',
-    "Lumos": 'https://link-to-lumos-image.com',
-    "Avada Kedavra": 'https://link-to-avada-kedavra-image.com',
-};
-
 
 
   // Fetch data from API
@@ -73,7 +60,7 @@ const spellImages = {
         if (data) displayResults(data);
         break;
       case 'spells':
-        data = await fetchData(ALT_API_URL, 'spells');
+        data = await fetchData(API_URL, 'spells');
         if (data) displayResults(data);
         break;
       case 'books':
@@ -96,7 +83,7 @@ const spellImages = {
     if (searchTerm) {
       try {
         const characters = await fetchData(API_URL, 'characters');
-        const spells = await fetchData(ALT_API_URL, 'spells');
+        const spells = await fetchData(API_URL, 'spells');
         const books = await fetchData(ALT_API_URL, 'books');
         const houses = await fetchData(ALT_API_URL, 'houses');
 
