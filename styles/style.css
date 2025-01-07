@@ -5,7 +5,7 @@ body {
   color: #FFFFFF;
   margin: 0;
   padding: 0;
-  background-image: url('https://i.postimg.cc/ZqmcPy10/harry-potter-desk-wallpaper-by-bamberos-compressed.jpg');
+  background-image:url('https://i.postimg.cc/ZqmcPy10/harry-potter-desk-wallpaper-by-bamberos-compressed.jpg'); /* https://i.postimg.cc/ZqmcPy10/harry-potter-desk-wallpaper-by-bamberos-compressed.jpg  */
   background-size: cover;
   background-attachment: fixed;
   background-repeat: no-repeat;
@@ -34,7 +34,6 @@ body {
   color: #FFD700;
 }
 
-
 /* Options and Search Styling */
 #options-container {
   position: fixed;
@@ -44,6 +43,7 @@ body {
   display: flex;
   justify-content: center;
   gap: 15px;
+  flex-wrap: nowrap!important;
   background: rgba(0, 0, 0, 0.8);
   padding: 20px;
   border-radius: 10px;
@@ -71,6 +71,7 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
+  flex-wrap: nowrap;
 }
 
 #searchData {
@@ -82,6 +83,7 @@ body {
   color: #fff;
   width: 200px;
 }
+
 /* Content Container */
 #content-container {
   margin-top: 280px;
@@ -92,13 +94,21 @@ body {
   padding: 0 20px;
 }
 
+.result-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+}
+
 .card {
   background: #333;
   color: #FFD700;
   border-radius: 10px;
-  width: calc(33.333% - 40px); /* Adjusted for three columns */
-  max-width: 300px; /* Ensure consistent size */
-  min-height: 400px; /* Consistent height */
+  width: calc(33.333% - 40px); /* Three cards per row on large screens */
+  max-width: 300px;
+  min-height: 400px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -125,29 +135,22 @@ body {
 }
 
 /* Responsive Adjustments */
-@media (max-width: 960px) {
-  #content-container {
-    margin-top: 300px;
-    gap: 15px;
-  }
-
+@media (max-width: 1200px) {
   .card {
-    width: calc(50% - 30px); /* Switch to two columns */
-    max-width: 100%;
-    margin: 0 auto;
+    width: calc(50% - 40px); /* Two cards per row */
   }
 }
 
-@media (max-width: 600px) {
-  #content-container {
-    margin-top: 320px;
+@media (max-width: 768px) {
+  .card {
+    width: 100%; /* Single column on smaller screens */
   }
 
-  .card {
-    width: 100%; /* Single column for small screens */
+  #options-container {
+    flex-wrap: wrap;
+    justify-content: center;
   }
 }
-
 
 /* Hamburger Menu for Mobile */
 #menu-toggle {
@@ -171,6 +174,59 @@ body {
   align-items: center;
 }
 
+/* Form Styling */
+#form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+#form label {
+  color: #FFD700;
+  font-size: 14px;
+  font-family: 'Cinzel', serif;
+}
+
+#searchData {
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #FFD700;
+  border-radius: 5px;
+  background-color: #222;
+  color: #fff;
+  width: 200px;
+  transition: all 0.3s ease-in-out;
+}
+
+#searchData:focus {
+  outline: none;
+  box-shadow: 0 0 10px #FFD700;
+  border-color: #FFD700;
+}
+
+#searchData::placeholder {
+  color: #aaa;
+  font-style: italic;
+}
+
+#form button {
+  padding: 10px 15px;
+  background: #333;
+  color: #FFD700;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+#form button:hover {
+  background: #FFD700;
+  color: #333;
+}
+
 @media (max-width: 960px) {
   #options-container {
     display: none;
@@ -186,4 +242,16 @@ body {
     display: block;
   }
 
+  #searchData {
+    width: 100%; /* Full width input on smaller screens */
+  }
+
+  #form {
+    flex-direction: column; /* Stack form elements */
+    gap: 15px;
+  }
+
+  #form button {
+    width: 100%; /* Full width button */
+  }
 }

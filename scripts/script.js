@@ -7,6 +7,21 @@ document.addEventListener('DOMContentLoaded', () => {
   const menuToggle = document.getElementById('menu-toggle');
   const optionsContainer = document.getElementById('options-container');
 
+  const houseImages = {
+    Gryffindor: 'https://link-to-gryffindor-image.com',
+    Slytherin: 'https://link-to-slytherin-image.com',
+    Ravenclaw: 'https://link-to-ravenclaw-image.com',
+    Hufflepuff: 'https://link-to-hufflepuff-image.com',
+};
+
+const spellImages = {
+    "Expelliarmus": 'https://link-to-expelliarmus-image.com',
+    "Lumos": 'https://link-to-lumos-image.com',
+    "Avada Kedavra": 'https://link-to-avada-kedavra-image.com',
+};
+
+
+
   // Fetch data from API
   async function fetchData(url, endpoint) {
     try {
@@ -36,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const card = document.createElement('div');
       card.classList.add('card');
       card.innerHTML = `
-        <img src="${result.image || 'https://via.placeholder.com/300x250?text=No+Image'}" alt="${result.name || result.title || 'No Image'}">
+        <img src="${result.image || result.cover || 'https://via.placeholder.com/300x250?text=No+Image'}" alt="${result.name || result.title || 'No Image'}">
         <h2>${result.name || result.title || 'Unknown'}</h2>
         <p><strong>House:</strong> ${result.house || 'Unknown'}</p>
         <p><strong>Description:</strong> ${result.description || 'N/A'}</p>
