@@ -1,0 +1,246 @@
+{
+    "info": {
+      "name": "PotterAPI Collection",
+      "description": "Postman collection for testing PotterAPI endpoints",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+      {
+        "name": "Books",
+        "item": [
+          {
+            "name": "Get All Books",
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "https://potterapi-fedeperin.vercel.app/en/books",
+                "protocol": "https",
+                "host": [
+                  "potterapi-fedeperin",
+                  "vercel",
+                  "app"
+                ],
+                "path": [
+                  "en",
+                  "books"
+                ]
+              }
+            }
+          },
+          {
+            "name": "Get Random Book",
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "https://potterapi-fedeperin.vercel.app/en/books/random",
+                "protocol": "https",
+                "host": [
+                  "potterapi-fedeperin",
+                  "vercel",
+                  "app"
+                ],
+                "path": [
+                  "en",
+                  "books",
+                  "random"
+                ]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "Characters",
+        "item": [
+          {
+            "name": "Get All Characters",
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "https://potterapi-fedeperin.vercel.app/en/characters",
+                "protocol": "https",
+                "host": [
+                  "potterapi-fedeperin",
+                  "vercel",
+                  "app"
+                ],
+                "path": [
+                  "en",
+                  "characters"
+                ]
+              }
+            }
+          },
+          {
+            "name": "Get Random Character",
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "https://potterapi-fedeperin.vercel.app/en/characters/random",
+                "protocol": "https",
+                "host": [
+                  "potterapi-fedeperin",
+                  "vercel",
+                  "app"
+                ],
+                "path": [
+                  "en",
+                  "characters",
+                  "random"
+                ]
+              }
+            }
+          },
+          {
+            "name": "Search Character by Name",
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "https://potterapi-fedeperin.vercel.app/en/characters?search=Weasley",
+                "protocol": "https",
+                "host": [
+                  "potterapi-fedeperin",
+                  "vercel",
+                  "app"
+                ],
+                "path": [
+                  "en",
+                  "characters"
+                ],
+                "query": [
+                  {
+                    "key": "search",
+                    "value": "Weasley"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "Houses",
+        "item": [
+          {
+            "name": "Get All Houses",
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "https://potterapi-fedeperin.vercel.app/en/houses",
+                "protocol": "https",
+                "host": [
+                  "potterapi-fedeperin",
+                  "vercel",
+                  "app"
+                ],
+                "path": [
+                  "en",
+                  "houses"
+                ]
+              }
+            }
+          },
+          {
+            "name": "Get Random House",
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "https://potterapi-fedeperin.vercel.app/en/houses/random",
+                "protocol": "https",
+                "host": [
+                  "potterapi-fedeperin",
+                  "vercel",
+                  "app"
+                ],
+                "path": [
+                  "en",
+                  "houses",
+                  "random"
+                ]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "Spells",
+        "item": [
+          {
+            "name": "Get All Spells",
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "https://potterapi-fedeperin.vercel.app/en/spells",
+                "protocol": "https",
+                "host": [
+                  "potterapi-fedeperin",
+                  "vercel",
+                  "app"
+                ],
+                "path": [
+                  "en",
+                  "spells"
+                ]
+              }
+            }
+          },
+          {
+            "name": "Get Random Spell",
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "https://potterapi-fedeperin.vercel.app/en/spells/random",
+                "protocol": "https",
+                "host": [
+                  "potterapi-fedeperin",
+                  "vercel",
+                  "app"
+                ],
+                "path": [
+                  "en",
+                  "spells",
+                  "random"
+                ]
+              }
+            }
+          },
+          {
+            "name": "Search Spell by Name",
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "https://potterapi-fedeperin.vercel.app/en/spells?search=Expelliarmus",
+                "protocol": "https",
+                "host": [
+                  "potterapi-fedeperin",
+                  "vercel",
+                  "app"
+                ],
+                "path": [
+                  "en",
+                  "spells"
+                ],
+                "query": [
+                  {
+                    "key": "search",
+                    "value": "Expelliarmus"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    ]
+  }
+  

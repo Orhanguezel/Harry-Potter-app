@@ -1,13 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const API_URL = 'https://hp-api.onrender.com/api';
   const ALT_API_URL = 'https://potterapi-fedeperin.vercel.app/en';
   const contentContainer = document.getElementById('content-container');
   const form = document.getElementById('form');
   const input = document.getElementById('searchData');
-  const menuToggle = document.getElementById('menu-toggle');
   const optionsContainer = document.getElementById('options-container');
-
-
+  const menuToggle = document.getElementById('menu-toggle');
 
   // Fetch data from API
   async function fetchData(url, endpoint) {
@@ -23,13 +20,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Clear the content container
+
   function clearContent() {
     contentContainer.innerHTML = '';
   }
 
-  // Display results in the container
-  function displayResults(results) {
+
+  function displayResults(results, category) {
     clearContent();
     const container = document.createElement('div');
     container.classList.add('result-container');
@@ -37,75 +34,138 @@ document.addEventListener('DOMContentLoaded', () => {
     results.forEach((result) => {
       const card = document.createElement('div');
       card.classList.add('card');
-      card.innerHTML = `
-        <img src="${result.image || result.cover || 'https://via.placeholder.com/300x250?text=No+Image'}" alt="${result.name || result.title || 'No Image'}">
-        <h2>${result.name || result.title || 'Unknown'}</h2>
-        <p><strong>House:</strong> ${result.house || 'Unknown'}</p>
-        <p><strong>Description:</strong> ${result.description || 'N/A'}</p>
-        <p><strong>Author/Founder:</strong> ${result.author || result.founder || 'N/A'}</p>
-      `;
+
+      let cardHTML = ``;
+
+  
+      if (result.image || result.cover) {
+        cardHTML += `<img src="${result.image || result.cover}" alt="${result.name || result.title || 'No Image'}">`;
+      }
+
+
+      switch (category) {
+        case 'characters':
+          cardHTML += `
+            <h2>${result.fullName || 'Unknown'}</h2>
+            <p><strong>Nick Name:</strong> ${result.nickname || 'Unknown'}</p>
+            <p><strong>House:</strong> ${result.hogwartsHouse || 'Unknown'}</p>
+            <p><strong>Birth Date:</strong> ${result.birthdate || 'N/A'}</p>
+          `;
+          break;
+
+        case 'spells':
+          cardHTML += `
+            <h2>${result.spell || 'Unknown'}</h2>
+            <p><strong>Use:</strong> ${result.use || 'N/A'}</p>
+          `;
+          break;
+
+        case 'houses':
+          cardHTML += `
+            <h2>${result.house || 'Unknown'}</h2>
+            <p><strong>Emoji:</strong> ${result.emoji || 'N/A'}</p>
+            <p><strong>Founder:</strong> ${result.founder || 'N/A'}</p>
+            <p><strong>House Colors:</strong> ${result.colors || 'N/A'}</p>
+            <p><strong>Animal:</strong> ${result.animal || 'N/A'}</p>
+          `;
+          break;
+
+        case 'books':
+          cardHTML += `
+            <h2>${result.title || 'Unknown'}</h2>
+            <p><strong>Description:</strong> ${result.description || 'N/A'}</p>
+          `;
+          break;
+
+        default:
+          cardHTML += `<h2>Unknown Category</h2>`;
+      }
+
+      card.innerHTML = cardHTML;
       container.appendChild(card);
     });
 
     contentContainer.appendChild(container);
   }
 
-  // Handle button clicks
+
   async function handleOptionClick(action) {
     clearContent();
     let data = null;
     switch (action) {
       case 'all-characters':
-        data = await fetchData(API_URL, 'characters');
-        if (data) displayResults(data);
+        data = await fetchData(ALT_API_URL, 'characters');
+        if (data) displayResults(data, 'characters');
         break;
       case 'spells':
-        data = await fetchData(API_URL, 'spells');
-        if (data) displayResults(data);
+        data = await fetchData(ALT_API_URL, 'spells');
+        if (data) displayResults(data, 'spells');
         break;
       case 'books':
         data = await fetchData(ALT_API_URL, 'books');
-        if (data) displayResults(data);
+        if (data) displayResults(data, 'books');
         break;
       case 'houses':
         data = await fetchData(ALT_API_URL, 'houses');
-        if (data) displayResults(data);
+        if (data) displayResults(data, 'houses');
         break;
       default:
         contentContainer.innerHTML = '<p>No data found.</p>';
     }
   }
 
-  // Handle search functionality
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const searchTerm = input.value.trim().toLowerCase();
+  
     if (searchTerm) {
       try {
-        const characters = await fetchData(API_URL, 'characters');
-        const spells = await fetchData(API_URL, 'spells');
+        const characters = await fetchData(ALT_API_URL, 'characters');
+        const spells = await fetchData(ALT_API_URL, 'spells');
         const books = await fetchData(ALT_API_URL, 'books');
         const houses = await fetchData(ALT_API_URL, 'houses');
+  
+        const filteredCharacters = (characters || []).filter((item) =>
+          (item.nickname && item.nickname.toLowerCase().includes(searchTerm)) ||
+          (item.fullName && item.fullName.toLowerCase().includes(searchTerm))
+        );
+  
+        const filteredSpells = (spells || []).filter((item) =>
+          item.spell && item.spell.toLowerCase().includes(searchTerm)
+        );
+  
+        const filteredBooks = (books || []).filter((item) =>
+          item.title && item.title.toLowerCase().includes(searchTerm)
+        );
+  
+        const filteredHouses = (houses || []).filter((item) =>
+          item.house && item.house.toLowerCase().includes(searchTerm)
+        );
 
-        const allResults = [
-          ...(characters || []),
-          ...(spells || []),
-          ...(books || []),
-          ...(houses || [])
-        ];
-
-        const filteredResults = allResults.filter((item) => {
-          return (
-            (item.name && item.name.toLowerCase().includes(searchTerm)) ||
-            (item.title && item.title.toLowerCase().includes(searchTerm)) ||
-            (item.description && item.description.toLowerCase().includes(searchTerm)) ||
-            (item.founder && item.founder.toLowerCase().includes(searchTerm))
-          );
-        });
-
-        if (filteredResults.length > 0) {
-          displayResults(filteredResults);
-        } else {
+        // Eğer her kategori ayrı gösterilecekse:
+        if (filteredCharacters.length > 0) {
+          displayResults(filteredCharacters, 'characters');
+        }
+  
+        if (filteredSpells.length > 0) {
+          displayResults(filteredSpells, 'spells');
+        }
+  
+        if (filteredBooks.length > 0) {
+          displayResults(filteredBooks, 'books');
+        }
+  
+        if (filteredHouses.length > 0) {
+          displayResults(filteredHouses, 'houses');
+        }
+  
+        // Eğer hiçbir sonuç yoksa:
+        if (
+          filteredCharacters.length === 0 &&
+          filteredSpells.length === 0 &&
+          filteredBooks.length === 0 &&
+          filteredHouses.length === 0
+        ) {
           clearContent();
           contentContainer.innerHTML = `<p>No results found for "${searchTerm}".</p>`;
         }
@@ -116,9 +176,12 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       contentContainer.innerHTML = `<p>Please enter a valid search term.</p>`;
     }
-  });
+});
 
-  // Handle menu toggle
+  
+  
+
+
   menuToggle.addEventListener('click', () => {
     optionsContainer.classList.toggle('open');
   });
