@@ -1,22 +1,24 @@
-/* General Styling */
-
+/* Reset CSS */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
+/* Body Styling */
 body {
   font-family: 'Comfortaa', sans-serif;
   background: #111;
   color: #FFFFFF;
   margin: 0;
   padding: 0;
-  background-image: url('../assets/harry-potter-desk-wallpaper.jpg'); /* https://i.postimg.cc/ZqmcPy10/harry-potter-desk-wallpaper-by-bamberos-compressed.jpg  */
+  background-image: url('../assets/harry-potter-desk-wallpaper.jpg'); 
   background-size: cover;
   background-attachment: fixed;
   background-repeat: no-repeat;
 }
 
+/* Header Styling */
 .header-container {
   position: fixed;
   top: 0;
@@ -49,7 +51,7 @@ body {
   display: flex;
   justify-content: center;
   gap: 15px;
-  flex-wrap: nowrap!important;
+  flex-wrap: nowrap !important;
   background: rgba(0, 0, 0, 0.8);
   padding: 20px;
   border-radius: 10px;
@@ -73,11 +75,20 @@ body {
   transform: scale(1.05);
 }
 
+/* Form Styling */
 #form {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
   gap: 10px;
-  flex-wrap: nowrap;
+  margin-top: 10px;
+}
+
+#form label {
+  color: #FFD700;
+  font-size: 14px;
+  font-family: 'Cinzel', serif;
 }
 
 #searchData {
@@ -88,6 +99,33 @@ body {
   background-color: #222;
   color: #fff;
   width: 200px;
+  transition: all 0.3s ease-in-out;
+}
+
+#searchData:focus {
+  outline: none;
+  box-shadow: 0 0 10px #FFD700;
+  border-color: #FFD700;
+}
+
+#searchData::placeholder {
+  color: #aaa;
+  font-style: italic;
+}
+
+#form button {
+  padding: 10px 15px;
+  background: #333;
+  color: #FFD700;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+#form button:hover {
+  background: #FFD700;
+  color: #333;
 }
 
 /* Content Container */
@@ -112,7 +150,7 @@ body {
   background: #333;
   color: #FFD700;
   border-radius: 10px;
-  width: calc(33.333% - 40px); /* Three cards per row on large screens */
+  width: calc(33.333% - 40px); 
   max-width: 300px;
   min-height: 400px;
   overflow: hidden;
@@ -180,59 +218,6 @@ body {
   align-items: center;
 }
 
-/* Form Styling */
-#form {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 10px;
-}
-
-#form label {
-  color: #FFD700;
-  font-size: 14px;
-  font-family: 'Cinzel', serif;
-}
-
-#searchData {
-  padding: 10px;
-  font-size: 14px;
-  border: 1px solid #FFD700;
-  border-radius: 5px;
-  background-color: #222;
-  color: #fff;
-  width: 200px;
-  transition: all 0.3s ease-in-out;
-}
-
-#searchData:focus {
-  outline: none;
-  box-shadow: 0 0 10px #FFD700;
-  border-color: #FFD700;
-}
-
-#searchData::placeholder {
-  color: #aaa;
-  font-style: italic;
-}
-
-#form button {
-  padding: 10px 15px;
-  background: #333;
-  color: #FFD700;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-}
-
-#form button:hover {
-  background: #FFD700;
-  color: #333;
-}
-
 @media (max-width: 960px) {
   #options-container {
     display: none;
@@ -249,16 +234,16 @@ body {
   }
 
   #searchData {
-    width: 100%; /* Full width input on smaller screens */
+    width: 100%; 
   }
 
   #form {
-    flex-direction: column; /* Stack form elements */
+    flex-direction: column;
     gap: 15px;
   }
 
   #form button {
-    width: 100%; /* Full width button */
+    width: 100%; 
   }
 
   #content-container {
