@@ -120,38 +120,52 @@ document.addEventListener('DOMContentLoaded', () => {
   
     if (searchTerm) {
       try {
-
         const characters = await fetchData(ALT_API_URL, 'characters');
         const spells = await fetchData(ALT_API_URL, 'spells');
         const books = await fetchData(ALT_API_URL, 'books');
         const houses = await fetchData(ALT_API_URL, 'houses');
   
-     
-        const allResults = [
-          ...(characters || []),
-          ...(spells || []),
-          ...(books || []),
-          ...(houses || [])
-        ];
+        const filteredCharacters = (characters || []).filter((item) =>
+          (item.nickname && item.nickname.toLowerCase().includes(searchTerm)) ||
+          (item.fullName && item.fullName.toLowerCase().includes(searchTerm))
+        );
   
-       
-        const filteredResults = allResults.filter((item) => {
-          return (
-            (item.name && item.name.toLowerCase().includes(searchTerm)) || 
-            (item.fullName && item.fullName.toLowerCase().includes(searchTerm)) || 
-            (item.title && item.title.toLowerCase().includes(searchTerm)) || 
-            (item.description && item.description.toLowerCase().includes(searchTerm)) || 
-            (item.spell && item.spell.toLowerCase().includes(searchTerm)) || 
-            (item.founder && item.founder.toLowerCase().includes(searchTerm)) || 
-            (item.nickname && item.nickname.toLowerCase().includes(searchTerm)) || 
-            (item.hogwartsHouse && item.hogwartsHouse.toLowerCase().includes(searchTerm)) 
-          );
-        });
+        const filteredSpells = (spells || []).filter((item) =>
+          item.spell && item.spell.toLowerCase().includes(searchTerm)
+        );
   
-     
-        if (filteredResults.length > 0) {
-          displayResults(filteredResults, 'search'); 
-        } else {
+        const filteredBooks = (books || []).filter((item) =>
+          item.title && item.title.toLowerCase().includes(searchTerm)
+        );
+  
+        const filteredHouses = (houses || []).filter((item) =>
+          item.house && item.house.toLowerCase().includes(searchTerm)
+        );
+
+        // Eğer her kategori ayrı gösterilecekse:
+        if (filteredCharacters.length > 0) {
+          displayResults(filteredCharacters, 'characters');
+        }
+  
+        if (filteredSpells.length > 0) {
+          displayResults(filteredSpells, 'spells');
+        }
+  
+        if (filteredBooks.length > 0) {
+          displayResults(filteredBooks, 'books');
+        }
+  
+        if (filteredHouses.length > 0) {
+          displayResults(filteredHouses, 'houses');
+        }
+  
+        // Eğer hiçbir sonuç yoksa:
+        if (
+          filteredCharacters.length === 0 &&
+          filteredSpells.length === 0 &&
+          filteredBooks.length === 0 &&
+          filteredHouses.length === 0
+        ) {
           clearContent();
           contentContainer.innerHTML = `<p>No results found for "${searchTerm}".</p>`;
         }
@@ -162,7 +176,9 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       contentContainer.innerHTML = `<p>Please enter a valid search term.</p>`;
     }
-  });
+});
+
+  
   
 
 
